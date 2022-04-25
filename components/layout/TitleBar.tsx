@@ -8,14 +8,17 @@ export default function TitleBar() {
 			margin: 0;
 			background-color: gray;
 			padding: 0;
-			position: absolute;
+			position: sticky;
 			top: 0;
 			left: 0;
 			opacity: 1;
+			z-index: 99;
 		`}>
 		<input className={css`
 			margin: auto;
-			width: 40em;
+			width: 70%;
+			display: block;
+			margin: auto;
 		`} placeholder="Type commands" />
 	</div>
 }
