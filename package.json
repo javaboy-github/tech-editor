@@ -5,7 +5,7 @@
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
-    "dev": "vite & electron .",
+    "dev": "node src/watch.mjs",
     "build": "vite build && electron-forge make",
     "lint": "eslint"
   },

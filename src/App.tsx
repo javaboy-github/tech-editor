@@ -10,7 +10,9 @@ export default function App() {
 	useEffect(() => {
 		let result: string | null;
 		do {
-		result = prompt("Enter dir path to tech-blog")
+			// TODO: set dir
+		  // result = prompt("Enter dir path to tech-blog")
+			result = "/Users/eita/work/tech-blog"
 		} while (!result);
 		setTreeviewDir(result);
 	}, []);
