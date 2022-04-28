@@ -1,6 +1,7 @@
 import { spawn } from 'child_process'
 import { createServer, build } from 'vite'
 import electron from 'electron'
+import start from './server.mjs'
 
 const query = new URLSearchParams(import.meta.url.split('?')[1])
 const debug = query.has('debug')
@@ -60,6 +61,7 @@ function watchPreload(server) {
 
 function startApiServer() {
   // TODO: Implement api server
+  start(3001);
 }
 
 // bootstrap
@@ -68,4 +70,4 @@ const server = await createServer({ configFile: 'vite.config.ts' })
 await server.listen()
 await watchPreload(server)
 await watchMain(server)
-
+startApiServer();
