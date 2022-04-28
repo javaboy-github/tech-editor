@@ -31,7 +31,7 @@ function watchMain(server) {
   }
 
   return build({
-    configFile: 'vite.config.ts',
+    configFile: 'react/vite.config.ts',
     mode: 'development',
     plugins: [!debug && startElectron].filter(Boolean),
     build: {
@@ -45,8 +45,9 @@ function watchMain(server) {
  */
 function watchPreload(server) {
   return build({
-    configFile: 'vite.config.ts',
+    configFile: 'react/vite.config.ts',
     mode: 'development',
+    root: "react",
     plugins: [{
       name: 'electron-preload-watcher',
       writeBundle() {
@@ -65,7 +66,7 @@ function startApiServer() {
 }
 
 // bootstrap
-const server = await createServer({ configFile: 'vite.config.ts' })
+const server = await createServer({ configFile: 'react/vite.config.ts' })
 
 await server.listen()
 await watchPreload(server)
