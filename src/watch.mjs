@@ -33,6 +33,7 @@ function watchMain(server) {
   return build({
     configFile: 'react/vite.config.ts',
     mode: 'development',
+    root: "react",
     plugins: [!debug && startElectron].filter(Boolean),
     build: {
       watch: {},

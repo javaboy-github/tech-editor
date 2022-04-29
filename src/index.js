@@ -12,6 +12,10 @@ const createWindow = () => {
     height: 600,
     titleBarStyle: 'hidden',
     transparent: true,
+    webPreferences: {
+      contextIsolation: false,
+      preload: path.join(__dirname, 'preload.js'),
+    },
   });
 
   if (isDev) {

@@ -4,17 +4,13 @@ import {css, cx} from "@emotion/css";
 import Tree from "../components/layout/Tree";
 import Edit from "../components/layout/Edit";
 import {useEffect, useState} from "react";
+import fs from 'fs';
 
 export default function App() {
-	const [treeviewDir, setTreeviewDir] = useState<string>("");
+	const [treeviewDir, setTreeviewDir] = useState<string[]>([]);
 	useEffect(() => {
-		let result: string | null;
-		do {
-			// TODO: set dir
-		  // result = prompt("Enter dir path to tech-blog")
-			result = "/Users/eita/work/tech-blog"
-		} while (!result);
-		setTreeviewDir(result);
+		const result = "../tech-blog";
+		(window as any).list_item(result).then((files: any) => setTreeviewDir(files));
 	}, []);
 
 	return (

@@ -2,12 +2,10 @@ import {css} from "@emotion/css";
 import {useEffect, useState} from "react";
 
 type Props = {
-	pathToBlog: string;
+	pathToBlog: string[];
 }
 
 export default function Tree({pathToBlog}: Props) {
-	const [files, setFiles] = useState<string[]>([]);
-
 	useEffect(() => {
 		// TODO: Putting source code that set a data to files
 	}, [pathToBlog]);
@@ -20,7 +18,7 @@ export default function Tree({pathToBlog}: Props) {
 		`}>
 		{
 			!pathToBlog ? <div>Enter correctolly path</div>
-				: <ul>{files.map(e => <li>{e}</li>)}</ul>
+				: <ul>{pathToBlog.map(e => <li>{e}</li>)}</ul>
 		}
 	</div>
 }
