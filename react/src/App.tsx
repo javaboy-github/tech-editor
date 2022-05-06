@@ -1,18 +1,22 @@
 import ReactDOM from "react-dom";
 import TitleBar from "../components/layout/TitleBar"
-import {css, cx} from "@emotion/css";
+import {css} from "@emotion/css";
 import Tree from "../components/layout/Tree";
 import Edit from "../components/layout/Edit";
 import {useEffect, useState} from "react";
-import fs from 'fs';
 
 export default function App() {
 	const [treeviewDir, setTreeviewDir] = useState<string[]>([]);
+	const [contentDirname, setContentDirname] = useState<string | undefined>(undefined);
+	const [content, setContent] = useState<string | undefined>(undefined);
 	useEffect(() => {
-		const result = "../tech-blog";
-		(window as any).list_item(result).then((files: any) => setTreeviewDir(files));
+		const result = "../tech-blog/article";
+		(window as any).list_item(result).then((files: any) => setTreeviewDir(files.filter((e: any) => e[0] != ".")));
 	}, []);
-
+	useEffect(() => {
+		if (!contentDirname) setContent(undefined);
+		(window as any).read_file().then((content: any) => setContent(content));
+	}, [contentDirname]);
 	return (
 		<div className={css`
 			background-color: #222;
@@ -29,8 +33,8 @@ export default function App() {
 				height: 100%;
 				display: flex;
 				`}>
-				<Tree pathToBlog={treeviewDir} />
-				<Edit />
+				<Tree pathToBlog={treeviewDir} handle={name => setContentDirname(name)}/>
+				<Edit content={content} />
 			</div>
 		</div>
 	);
