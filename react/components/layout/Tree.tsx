@@ -23,15 +23,15 @@ export default function Tree({pathToBlog, handle}: Props) {
 				padding: 0;
 				font-size: 0.8em;
 			`}>{pathToBlog.map(e => <li className={css`
-			box-sizing: border-box;
+					box-sizing: border-box;
 					list-style-type: none;
 					margin: 0;
 					padding-left: 7px;
 					display: block;
 					&:hover{
-					border-left: 5px solid aqua;
-					margin: 0;
-					padding: 1;
+						border-left: 5px solid aqua;
+						margin: 0;
+						padding: 1;
 					}
 				`} onClick={() => handle(e)}>{e}</li>)}
 		<li className={css`
@@ -40,7 +40,7 @@ export default function Tree({pathToBlog, handle}: Props) {
 			display: block;
 			padding-left: 7px;
 			&:hover{
-					border-left: 5px solid lightgreen;
+				border-left: 5px solid lightgreen;
 			}
 			`}>Add</li>
 			</ul>

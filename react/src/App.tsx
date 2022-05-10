@@ -10,12 +10,12 @@ export default function App() {
 	const [contentDirname, setContentDirname] = useState<string | undefined>(undefined);
 	const [content, setContent] = useState<string | undefined>(undefined);
 	useEffect(() => {
-		const result = "../tech-blog/article";
+		const result = "../tech-blog/article/";
 		(window as any).list_item(result).then((files: any) => setTreeviewDir(files.filter((e: any) => e[0] != ".")));
 	}, []);
 	useEffect(() => {
 		if (!contentDirname) setContent(undefined);
-		(window as any).read_file().then((content: any) => setContent(content));
+		(window as any).read_file("../tech-blog/article/" + (contentDirname as string) + "/index.md").then((content: any) => setContent(content));
 	}, [contentDirname]);
 	return (
 		<div className={css`
@@ -34,7 +34,7 @@ export default function App() {
 				display: flex;
 				`}>
 				<Tree pathToBlog={treeviewDir} handle={name => setContentDirname(name)}/>
-				<Edit content={content} />
+			  <Edit content={content} />
 			</div>
 		</div>
 	);
