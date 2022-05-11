@@ -1,0 +1,6 @@
+extends: 
+  - stylelint-config-standard
+overrides: 
+  - files:
+    - '**/*.{ts,tsx}'
+    customSyntax: "@stylelint/postcss-css-in-js"

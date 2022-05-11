@@ -7,8 +7,12 @@
   "scripts": {
     "dev": "vite react & electron .",
     "build": "vite build && electron-forge make",
-    "lint": "eslint --ext .tsx,.ts react/",
-    "lintfix": "npm run lint -- --fix"
+    "eslint": "eslint --ext .tsx,.ts react/",
+    "eslintfix": "npm run lint -- --fix",
+    "stylelint": "stylelint --ignore-path .vite.config.ts dist/* \"react/**/*.+(css|ts|tsx)\"",
+    "stylelintfix": "npm run stylelint -- --fix",
+    "lint": "eslint && stylelint",
+    "lintfix": "eslintfix && stylelintfix"
   },
   "keywords": [],
   "author": {
@@ -59,6 +63,8 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "@emotion/eslint-plugin": "^11.7.0",
+    "@stylelint/postcss-css-in-js": "^0.38.0",
     "@types/react": "^18.0.6",
     "@types/react-dom": "^18.0.2",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
@@ -73,6 +79,8 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
+    "stylelint": "^14.8.2",
+    "stylelint-config-standard": "^25.0.0",
     "typescript": "^4.6.3",
     "vite": "^2.9.5"
   }
