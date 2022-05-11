@@ -1,7 +1,8 @@
-import {css, cx} from "@emotion/css";
+import { css, cx } from '@emotion/css';
 
 export default function TitleBar() {
-	return <div className={css`
+  return (
+    <div className={css`
 			-webkit-app-region: drag;
 			height: 25px;
 			width: 100%;
@@ -13,12 +14,17 @@ export default function TitleBar() {
 			left: 0;
 			opacity: 1;
 			z-index: 99;
-		`}>
-		<input className={css`
+		`}
+    >
+      <input
+        className={css`
 			margin: auto;
 			width: 70%;
 			display: block;
 			margin: auto;
-		`} placeholder="Type commands" />
-	</div>
+		`}
+        placeholder="Type commands"
+      />
+    </div>
+  );
 }
