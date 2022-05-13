@@ -19,18 +19,18 @@ export default function App() {
 	}, [contentDirname]);
 	return (
 		<div className={css`background-color: #222;
-      height: 100%;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      color: white;
-      opacity: 0.8;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: white;
+  opacity: 0.8;
 `}
 		>
 			<TitleBar />
 			<div className={css`width: 100%;
-        height: 100%;
-        display: flex;
+  height: 100%;
+  display: flex;
 `}
 			>
 				<Tree pathToBlog={treeviewDir} handle={(name) => setContentDirname(name)} />

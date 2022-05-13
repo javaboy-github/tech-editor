@@ -9,7 +9,7 @@
     "build": "vite build && electron-forge make",
     "eslint": "eslint --ext .tsx,.ts react/",
     "eslintfix": "npm run lint -- --fix",
-    "stylelint": "stylelint --ignore-path .vite.config.ts dist/* \"react/**/*.+(css|ts|tsx)\"",
+    "stylelint": "stylelint \"react/**/*.+(css|ts|tsx)\"",
     "stylelintfix": "npm run stylelint -- --fix",
     "lint": "eslint && stylelint",
     "lintfix": "eslintfix && stylelintfix"

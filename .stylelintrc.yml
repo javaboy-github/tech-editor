@@ -4,3 +4,4 @@ overrides:
   - files:
     - '**/*.{ts,tsx}'
     customSyntax: "@stylelint/postcss-css-in-js"
+    ignoreFiles: ["vite.config.js", "**/index.**.css"]

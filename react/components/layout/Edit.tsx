@@ -10,10 +10,10 @@ export default function Edit({ content }: Props) {
 	if (!content) return <></>;
 	return (
 		<div className={css`flex: 70%;
-        height: 100%;
-        opacity: 1;
-        background-color: #111;
-        color: white;
+  height: 100%;
+  opacity: 1;
+  background-color: #111;
+  color: white;
 `}
 		>
 			<MarkdownEditor value={content} />
