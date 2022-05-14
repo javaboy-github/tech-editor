@@ -11,8 +11,8 @@
     "eslintfix": "npm run lint -- --fix",
     "stylelint": "stylelint \"react/**/*.+(css|ts|tsx)\"",
     "stylelintfix": "npm run stylelint -- --fix",
-    "lint": "eslint && stylelint",
-    "lintfix": "eslintfix && stylelintfix"
+    "lint": "npm run eslint && npm run stylelint",
+    "lintfix": "npm run eslintfix && npm run stylelintfix"
   },
   "keywords": [],
   "author": {
