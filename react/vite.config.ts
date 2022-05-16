@@ -7,6 +7,7 @@ export default defineConfig(({command}) => {
 	if (command == "build") data.base = "./";
 	return {
 		...data,
+		global: {},
 		plugins: [react({})]
 	};
 })

@@ -15,7 +15,7 @@ export default function App() {
 		(window as any).list_item(result).then((files: any) => setTreeviewDir(files.filter((e: any) => e[0] != '.')));
 	}, []);
 	useEffect(() => {
-		if (!contentDirname) setContent(undefined);
+		if (!contentDirname || contentDirname as string == "undefined") setContent(undefined);
 		(window as any).read_file(`../tech-blog/article/${contentDirname as string}/index.md`).then((content: any) => setContent(content));
 	}, [contentDirname]);
 	return (

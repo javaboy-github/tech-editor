@@ -6,9 +6,9 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "vite react & electron .",
-    "build": "vite build && electron-forge make",
+    "build": "vite build react && electron-forge make",
     "eslint": "eslint --ext .tsx,.ts react/",
-    "eslintfix": "npm run lint -- --fix",
+    "eslintfix": "npm run eslint -- --fix",
     "stylelint": "stylelint \"react/**/*.+(css|ts|tsx)\"",
     "stylelintfix": "npm run stylelint -- --fix",
     "lint": "npm run eslint && npm run stylelint",
@@ -49,13 +49,16 @@
   "license": "MIT",
   "dependencies": {
     "@emotion/css": "^11.9.0",
-    "@uiw/react-markdown-editor": "^4.0.3",
+    "@uiw/react-md-editor": "^3.12.3",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "emotion": "^11.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "remark": "^14.0.2",
+    "remark-html": "^15.0.1",
+    "remark-prism": "^1.3.6"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.63",
@@ -67,6 +70,7 @@
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@types/react": "^18.0.6",
     "@types/react-dom": "^18.0.2",
+    "@types/remark-prism": "^1.3.3",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
     "@vitejs/plugin-react": "^1.3.1",
