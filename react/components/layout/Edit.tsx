@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import {remark} from 'remark';
 import html from 'remark-html';
 import prism from 'remark-prism';
+import {toAST} from '../../src/markdown';
 
 type Props = {
 	content: string | undefined;
@@ -24,6 +25,7 @@ export default function Edit({ content }: Props) {
 	color: white;
 		`} contentEditable>
 			<div dangerouslySetInnerHTML={{ __html: html as string }}/>
+			{toAST(content)}
 		</div>
 	);
 	// <MDEditor.Markdown source={content} />

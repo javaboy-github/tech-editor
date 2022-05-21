@@ -3,7 +3,6 @@
 	<body id="root">
 	</body>
 	<script>
-		var global = global || window;
 	</script>
 	<script type="module" src="./src/App.tsx"></script>
 	<style>
