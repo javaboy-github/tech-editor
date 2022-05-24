@@ -30,6 +30,32 @@ export function toAST(content: string): any {
 	return JSON.stringify(result, null, 2);
 }
 
+function splitHeadAndBody(file: string) {
+ let isInHead = false;
+ const lines = file.split("\n");
+ let head = {};
+ for (let i=0;i<lines.length;i++) {
+ if (lines[i] == "") return;
+   if (lines[i] == "===" && !isInHead) isInHead = true;
+   if (lines[i] == "===" &&  isInHead) isInHead = false;
+   if (!isInHead) {
+     // TODO: return head and body
+   
+ } else {
+ for (let j=0;j<lines[i].length;j++) {
+ let property = "";
+  do {
+ if (lines[i][j] == ":") break;
+   property += lines[i][j];
+   i++;
+ } while (true);
+   head[preperty] = lines[i].substring(j);
+   break;
+ }
+ 
+}}
+}
+
 export function toJSX(markdown: any) {
 
 }
