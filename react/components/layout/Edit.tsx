@@ -13,7 +13,7 @@ type Props = {
 export default function Edit({ content }: Props) {
 	const [html, setHtml] = useState(content);
 	useEffect(() => {
-   if (!content) return;
+		if (!content) return;
 		toMarkdown(content).then((result: string) => setHtml(result));
 	}, [content]);
 	if (!content) return <></>;
@@ -33,8 +33,8 @@ export default function Edit({ content }: Props) {
 
 
 async function toMarkdown(raw: string): Promise<string>{
- const contentHtml = await remark()
-/*		.use(prism, {plugins: [
+	const contentHtml = await remark()
+	/*		.use(prism, {plugins: [
 			'autolinker',
 			'command-line',
 			'data-uri-highlight',
@@ -46,4 +46,4 @@ async function toMarkdown(raw: string): Promise<string>{
 		.use(html, { sanitize: false })
 		.process(raw.replace(/(```.+\n)/g, (_, match) => match.indexOf("treeview") != -1 ? match : `${match.replace("\n", "")}[class="line-numbers"]\n`));
 	 return contentHtml.toString();
-};
+}

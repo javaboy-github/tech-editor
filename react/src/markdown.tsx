@@ -16,44 +16,44 @@ type Markdown = {
 }
 
 export function toAST(content: string): any {
-  // gray-matterで解析
+	// gray-matterで解析
 	const matterResult = matter(content);
 
-  // データを合体させる
-  const markdown = {
-    ...matterResult.data,
-    raw: matterResult.content,
-    title: matterResult.data.tag.map((e:string) =>`【${e}】`).join("") + matterResult.data.title 
-  } as Markdown;
-  const result = remark().use(html, { sanitize: false })
-    .process(markdown.content);
+	// データを合体させる
+	const markdown = {
+		...matterResult.data,
+		raw: matterResult.content,
+		title: matterResult.data.tag.map((e:string) =>`【${e}】`).join("") + matterResult.data.title 
+	} as Markdown;
+	const result = remark().use(html, { sanitize: false })
+		.process(markdown.content);
 	return JSON.stringify(result, null, 2);
 }
 
-function splitHeadAndBody(file: string) {
- let isInHead = false;
- const lines = file.split("\n");
- let head = {};
- for (let i=0;i<lines.length;i++) {
- if (lines[i] == "") return;
-   if (lines[i] == "===" && !isInHead) isInHead = true;
-   if (lines[i] == "===" &&  isInHead) isInHead = false;
-   if (!isInHead) {
-     // TODO: return head and body
-   
- } else {
- for (let j=0;j<lines[i].length;j++) {
- let property = "";
-  do {
- if (lines[i][j] == ":") break;
-   property += lines[i][j];
-   i++;
- } while (true);
-   head[preperty] = lines[i].substring(j);
-   break;
- }
- 
-}}
+function splitHeadAndBody(file: string): {head: any;content:string;} {
+	let isInHead = false;
+	const lines = file.split("\n");
+	const head:any = {};
+	let content = "";
+	for (let i=0;i<lines.length;i++) {
+		if (lines[i] == "") continue;
+		if (lines[i] == "===" && !isInHead) {isInHead = true; continue;}
+		if (lines[i] == "===" &&  isInHead) {isInHead = false;continue;}
+		if (!isInHead) {
+      content += lines[i];
+		} else {
+			for (let j=0;j<lines[i].length;j++) {
+				let property = "";
+				do {
+					if (lines[i][j] == ":") break;
+					property += lines[i][j];
+					i++;
+				} while (true);
+				head[property] = lines[i].substring(j);
+				break;
+			}
+		}};
+		return {head, content};
 }
 
 export function toJSX(markdown: any) {
