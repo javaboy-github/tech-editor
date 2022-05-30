@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import TitleBar from '../components/layout/TitleBar';
 import Tree from '../components/layout/Tree';
 import Edit from '../components/layout/Edit';
+import {splitHeadAndBody} from './markdown';
 
 export default function App() {
 	const [treeviewDir, setTreeviewDir] = useState<string[]>([]);
@@ -16,6 +17,9 @@ export default function App() {
 	}, []);
 	useEffect(() => {
 		if (!contentDirname || contentDirname as string == "undefined") setContent(undefined);
+
+    
+
 		(window as any).read_file(`../tech-blog/article/${contentDirname as string}/index.md`).then((content: any) => setContent(content));
 	}, [contentDirname]);
 	return (

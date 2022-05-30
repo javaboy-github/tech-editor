@@ -12,10 +12,15 @@ type Props = {
 
 export default function Edit({ content }: Props) {
 	const [html, setHtml] = useState(content);
+	const [ast, setAst] = useState("loading...");
+
 	useEffect(() => {
 		if (!content) return;
 		toMarkdown(content).then((result: string) => setHtml(result));
 	}, [content]);
+	useEffect(() => {
+	 toAST(content).then((result: any) => {setAst(result)});
+ }, [html]);
 	if (!content) return <></>;
 	return (
 		<div className={css`flex: 70%;
@@ -25,7 +30,7 @@ export default function Edit({ content }: Props) {
 	color: white;
 		`} contentEditable>
 			<div dangerouslySetInnerHTML={{ __html: html as string }}/>
-			{toAST(content)}
+			{ast}
 		</div>
 	);
 	// <MDEditor.Markdown source={content} />
