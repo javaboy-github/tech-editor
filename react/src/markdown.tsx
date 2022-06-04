@@ -15,12 +15,46 @@ type Markdown = {
 }
 
 export async function toAST(file: string) {
- const {head, content} = splitHeadAndBody(file);
+	const {head, content} = splitHeadAndBody(file);
 
 	const result = await remark().use(html, { sanitize: false })
 		.process(content);
 	// return JSON.stringify(result, null, 2);
-	return JSON.stringify(result, null, 2);
+	const htmlContent = JSON.stringify(result, null, 2);
+	return htmlToAst(htmlContent);
+}
+
+export type HtmlTag = {
+	name: string;
+	id: string;
+	content: string;
+}
+
+export function htmlToAst(html:string): HtmlTag[] {
+	const domparser = new DOMParser();
+	const doc = domparser.parseFromString(html, "text/html");
+	const root = doc.body.children[0];
+ 
+	const result: HtmlTag[] = [];
+
+	console.log(root.childNodes);
+
+	for (let i = 0; i < root.childNodes.length; i++) {
+		const child = root.childNodes[i];
+		try {
+		const name = child.nodeName == "#text" ? "p" : child.nodeName.toLowerCase();
+		const id = uuidv4();
+		const content = (child.textContent || "");
+		result.push({name, id, content});
+		} catch (e) {console.log(e)}
+	}
+	return result;
+}
+
+function uuidv4() {
+	return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+		((c as any) ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> (c as any) / 4).toString(16)
+	);
 }
 
 function splitHeadAndBody(file: string): {head: any;content:string;} {
@@ -33,10 +67,11 @@ function splitHeadAndBody(file: string): {head: any;content:string;} {
 		if (lines[i] == "===" && !isInHead) {isInHead = true; continue;}
 		if (lines[i] == "===" &&  isInHead) {isInHead = false;continue;}
 		if (!isInHead) {
-      content += lines[i];
+			content += lines[i];
 		} else {
 			for (let j=0;j<lines[i].length;j++) {
 				let property = "";
+				/* eslint no-constant-condition: "off" */
 				do {
 					if (lines[i][j] == ":") break;
 					property += lines[i][j];
@@ -45,8 +80,8 @@ function splitHeadAndBody(file: string): {head: any;content:string;} {
 				head[property] = lines[i].substring(j);
 				break;
 			}
-		}};
-		return {head, content};
+		}}
+	return {head, content};
 }
 
 export function toJSX(markdown: any) {

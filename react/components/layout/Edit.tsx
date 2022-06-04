@@ -4,7 +4,8 @@ import {useState, useEffect} from 'react';
 import {remark} from 'remark';
 import html from 'remark-html';
 import prism from 'remark-prism';
-import {toAST} from '../../src/markdown';
+import {HtmlTag, toAST} from '../../src/markdown';
+import EditableBlock from "../../components/EditableBlock";
 
 type Props = {
 	content: string | undefined;
@@ -12,15 +13,16 @@ type Props = {
 
 export default function Edit({ content }: Props) {
 	const [html, setHtml] = useState(content);
-	const [ast, setAst] = useState("loading...");
+	const [ast, setAst] = useState<HtmlTag[]>([]);
 
 	useEffect(() => {
 		if (!content) return;
 		toMarkdown(content).then((result: string) => setHtml(result));
 	}, [content]);
 	useEffect(() => {
-	 toAST(content).then((result: any) => {setAst(result)});
- }, [html]);
+		if (!content) return;
+		toAST(content as string).then((result: any) => {setAst(result)});
+	}, [html]);
 	if (!content) return <></>;
 	return (
 		<div className={css`flex: 70%;
@@ -28,9 +30,9 @@ export default function Edit({ content }: Props) {
 	opacity: 1;
 	background-color: #111;
 	color: white;
-		`} contentEditable>
-			<div dangerouslySetInnerHTML={{ __html: html as string }}/>
-			{ast}
+		`}>
+			{/* <div dangerouslySetInnerHTML={{ __html: html as string }}/> */}
+			{ast.map(e => <EditableBlock base={e} key={e.id}/>)}
 		</div>
 	);
 	// <MDEditor.Markdown source={content} />
