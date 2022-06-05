@@ -9,33 +9,28 @@ import EditableBlock from "../../components/EditableBlock";
 
 type Props = {
 	content: string | undefined;
+	path: string;
 };
 
-export default function Edit({ content }: Props) {
-	const [html, setHtml] = useState(content);
+export default function Edit({ content, path }: Props) {
 	const [ast, setAst] = useState<HtmlTag[]>([]);
 
 	useEffect(() => {
 		if (!content) return;
-		toMarkdown(content).then((result: string) => setHtml(result));
+		toAST(content as string, path).then(result => {setAst(result)});
 	}, [content]);
-	useEffect(() => {
-		if (!content) return;
-		toAST(content as string).then((result: any) => {setAst(result)});
-	}, [html]);
 	if (!content) return <></>;
 	return (
 		<div className={css`flex: 70%;
-	height: 100%;
-	opacity: 1;
-	background-color: #111;
-	color: white;
-		`}>
+  height: 100%;
+  opacity: 1;
+  background-color: #111;
+  color: white;
+`}>
 			{/* <div dangerouslySetInnerHTML={{ __html: html as string }}/> */}
-			{ast.map(e => <EditableBlock base={e} key={e.id}/>)}
+			{ast.map((e, i) => <EditableBlock base={e} onChange={(newbase) => setAst(ast.map((older, j) => i == j ? newbase: older))} key={e.id}/>)}
 		</div>
 	);
-	// <MDEditor.Markdown source={content} />
 }
 
 
@@ -52,5 +47,5 @@ async function toMarkdown(raw: string): Promise<string>{
 		]})*/
 		.use(html, { sanitize: false })
 		.process(raw.replace(/(```.+\n)/g, (_, match) => match.indexOf("treeview") != -1 ? match : `${match.replace("\n", "")}[class="line-numbers"]\n`));
-	 return contentHtml.toString();
+	return contentHtml.toString();
 }

@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import TitleBar from '../components/layout/TitleBar';
 import Tree from '../components/layout/Tree';
 import Edit from '../components/layout/Edit';
-import {splitHeadAndBody} from './markdown';
 
 export default function App() {
 	const [treeviewDir, setTreeviewDir] = useState<string[]>([]);
@@ -39,7 +38,7 @@ export default function App() {
 `}
 			>
 				<Tree pathToBlog={treeviewDir} handle={(name) => setContentDirname(name)} />
-				<Edit content={content} />
+				<Edit content={content} path={treeviewDir}/>
 			</div>
 		</div>
 	);
