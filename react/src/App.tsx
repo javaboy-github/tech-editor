@@ -15,7 +15,7 @@ export default function App() {
 		(window as any).list_item(result).then((files: any) => setTreeviewDir(files.filter((e: any) => e[0] != '.')));
 	}, []);
 	useEffect(() => {
-		if (!contentDirname || contentDirname as string == "undefined") setContent(undefined);
+		if (!contentDirname || contentDirname as string == "undefined") {setContent(undefined);return;}
 
     
 
@@ -38,7 +38,10 @@ export default function App() {
 `}
 			>
 				<Tree pathToBlog={treeviewDir} handle={(name) => setContentDirname(name)} />
-				<Edit content={content} path={treeviewDir}/>
+				{ contentDirname ? 
+				<Edit content={content} path={"/Users/eita/work/tech-blog"}/>
+				:
+				<div/>}
 			</div>
 		</div>
 	);

@@ -56,7 +56,7 @@ export function htmlToAst(html:string, path:string): HtmlTag[] {
 				case "a":
 					return {href: (child as HTMLAnchorElement).href};
 				case "img":
-					return {src: "files:///" + path +  "/" + (child as HTMLImageElement).src};
+					return {src: "file://" + path + (child as HTMLImageElement).src.substring(25).replace("/%22", "")};
 				default:
 					return null;
 				}

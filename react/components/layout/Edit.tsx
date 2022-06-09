@@ -28,7 +28,14 @@ export default function Edit({ content, path }: Props) {
   color: white;
 `}>
 			{/* <div dangerouslySetInnerHTML={{ __html: html as string }}/> */}
-			{ast.map((e, i) => <EditableBlock base={e} onChange={(newbase) => setAst(ast.map((older, j) => i == j ? newbase: older))} key={e.id}/>)}
+			{ast.map(e => {
+				if (!e.additionalData || !("src" in e.additionalData)) return e;
+				console.log(`${e.additionalData.src}`);
+				return {
+					...e,
+					src: `${path}/${e.additionalData.src}`
+				} as HtmlTag;
+			}).map((e, i) => <EditableBlock base={e} onChange={(newbase) => setAst(ast.map((older, j) => i == j ? newbase: older))} key={e.id}/>)}
 		</div>
 	);
 }
