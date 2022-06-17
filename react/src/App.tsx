@@ -1,5 +1,4 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
+import { createRoot } from 'react-dom/client';
 import { css } from '@emotion/css';
 import { useEffect, useState } from 'react';
 import TitleBar from '../components/layout/TitleBar';
@@ -39,7 +38,7 @@ export default function App() {
 			>
 				<Tree pathToBlog={treeviewDir} handle={(name) => setContentDirname(name)} />
 				{ contentDirname ? 
-				<Edit content={content} path={"/Users/eita/work/tech-blog"}/>
+				<Edit content={content} path={"../tech-blog"}/>
 				:
 				<div/>}
 			</div>
@@ -47,7 +46,5 @@ export default function App() {
 	);
 }
 
-ReactDOM.render(
-	<App />,
-	document.getElementById('root'),
-);
+const root = createRoot(document.body);
+root.render(<App />);
